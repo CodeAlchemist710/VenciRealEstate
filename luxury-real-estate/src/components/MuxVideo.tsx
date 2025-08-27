@@ -19,7 +19,6 @@ export default function MuxVideo({ playbackId, className }: MuxVideoProps) {
         width: '100vw',
         height: '100vh',
         objectFit: 'cover',
-        transform: 'scale(1.05)',
         position: 'absolute',
         top: '50%',
         left: '50%',
