@@ -14,7 +14,6 @@ export default function MuxVideo({ playbackId, className }: MuxVideoProps) {
       autoPlay
       muted
       loop
-      controls={false}
       className={className}
       style={{
         width: '100vw',

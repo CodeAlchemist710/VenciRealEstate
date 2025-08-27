@@ -33,11 +33,28 @@ export default function HomePage() {
     return () => clearInterval(interval);
   }, [rotatingTexts.length]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for your inquiry! We will contact you soon.');
-    setFormData({ name: '', email: '', phone: '', message: '' });
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert('Thank you for your inquiry! We will contact you soon.');
+        setFormData({ name: '', email: '', phone: '', message: '' });
+      } else {
+        alert('There was an error sending your message. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('There was an error sending your message. Please try again.');
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -90,7 +107,7 @@ export default function HomePage() {
           </h1>
 
           {/* Business Location Section */}
-          <h3 className="text-1xl md:text-2xl font-light text-white mb-8" style={{ fontFamily: 'Raleway, sans-serif' }}>
+          <h3 className="text-1xl md:text-2xl font-extralight text-white mb-8" style={{ fontFamily: 'Raleway, sans-serif' }}>
             COSTA RICA
           </h3>
 
