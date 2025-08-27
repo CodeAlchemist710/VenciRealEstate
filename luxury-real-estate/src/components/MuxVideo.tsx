@@ -14,15 +14,18 @@ export default function MuxVideo({ playbackId, className }: MuxVideoProps) {
       autoPlay
       muted
       loop
-      className={className}
       style={{
-        width: '100vw',
-        height: '100vh',
-        objectFit: 'cover',
         position: 'absolute',
         top: '50%',
         left: '50%',
-        transform: 'translate(-50%, -50%) scale(1.05)',
+        transform: 'translate(-50%, -50%)',
+        minWidth: '100vw',
+        minHeight: '100vh',
+        width: 'auto',
+        height: 'auto',
+        aspectRatio: '512/271',
+        objectFit: 'cover',
+        zIndex: 0,
       }}
     />
   );

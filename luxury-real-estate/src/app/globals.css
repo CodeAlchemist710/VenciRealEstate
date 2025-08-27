@@ -67,6 +67,12 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Raleway', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  html {
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -81,6 +87,32 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   font-family: 'Raleway', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure video fills entire viewport with proper aspect ratio */
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.video-container video,
+.video-container mux-player {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100vw;
+  min-height: 100vh;
+  width: auto;
+  height: auto;
+  aspect-ratio: 512/271;
+  object-fit: cover;
 }
 
 @layer utilities {

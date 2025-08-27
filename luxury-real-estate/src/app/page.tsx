@@ -74,19 +74,16 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Video Background */}
-      <section className="relative h-screen overflow-hidden bg-gray-700">
+      <section className="relative w-screen h-screen overflow-hidden" style={{ margin: 0, padding: 0 }}>
       {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <MuxVideo 
-          playbackId="SJtMmzbwrupZu5LYsvhGuKvb8OtU9ErFM8BnwXsrF0200"
-          className="absolute inset-0"
-        />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-800/50 via-gray-700/40 to-gray-900/60 z-10" />
-      </div>
+      <MuxVideo 
+        playbackId="SJtMmzbwrupZu5LYsvhGuKvb8OtU9ErFM8BnwXsrF0200"
+      />
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-800/50 via-gray-700/40 to-gray-900/60 pointer-events-none z-10" />
 
       {/* Hero Content */}
-      <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4 py-8">
+      <div className="relative z-20 flex flex-col items-center justify-center h-full text-center">
         {/* Logo */}
         <div className="absolute top-6 left-1/2 transform -translate-x-1/2" style={{ marginLeft: '-6px' }}>
         <Image
@@ -94,7 +91,7 @@ export default function HomePage() {
           alt="Venci Lopez Real Estate"
           width={1800}
           height={900}
-          className="w-auto h-64 md:h-96 lg:h-[32rem] object-contain"
+          className="w-auto h-64 sm:h-72 md:h-80 lg:h-96 xl:h-[32rem] object-contain"
           priority
         />
         </div>
