@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
+import MuxVideo from '@/components/MuxVideo';
 
 export default function HomePage() {
   const [currentText, setCurrentText] = useState(0);
@@ -58,25 +59,19 @@ export default function HomePage() {
       {/* Hero Section with Video Background */}
       <section className="relative h-screen overflow-hidden bg-gray-700">
       {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full">
-        <iframe
-        src="https://iframe.mediadelivery.net/embed/484464/924a3f3a-c4f6-4859-975b-e49d61a6ca55?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false"
-        className="w-full h-full min-h-full min-w-full absolute inset-0"
-        allow="autoplay; fullscreen"
-        style={{
-          pointerEvents: 'none',
-          width: '100vw',
-          height: '100vh',
-        }}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
+        <MuxVideo 
+          playbackId="SJtMmzbwrupZu5LYsvhGuKvb8OtU9ErFM8BnwXsrF0200"
+          className="absolute inset-0"
         />
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-800/50 via-gray-700/40 to-gray-900/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-800/50 via-gray-700/40 to-gray-900/60 z-10" />
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+      <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4 py-8">
         {/* Logo */}
-        <div className="mb-8">
+        <div className="absolute top-6 left-1/2 transform -translate-x-1/2" style={{ marginLeft: '-6px' }}>
         <Image
           src="/logo.png"
           alt="Venci Lopez Real Estate"
@@ -87,20 +82,27 @@ export default function HomePage() {
         />
         </div>
 
-        {/* Rotating Text */}
-        <h1 className="text-2xl md:text-4xl font-bold text-white mb-6 transition-all duration-350" style={{ fontFamily: 'Raleway, sans-serif' }}>
-        {rotatingTexts[currentText]}
-        </h1>
+        {/* Text Section */}
+        <div className="absolute bottom-36 left-1/2 transform -translate-x-1/2 text-center">
+          {/* Rotating Text */}
+          <h1 className="text-2xl md:text-4xl font-extralight text-white transition-all duration-350" style={{ fontFamily: 'Raleway, sans-serif', marginBottom: '30px' }}>
+          {rotatingTexts[currentText]}
+          </h1>
 
-        {/* Tagline */}
-        <p className="text-xl md:text-2xl text-gray-200 mb-8 font-light tracking-wide" style={{ fontFamily: 'Raleway, sans-serif' }}>
-        A paradise is about to unfold.
-        </p>
+          {/* Business Location Section */}
+          <h3 className="text-1xl md:text-2xl font-light text-white mb-8" style={{ fontFamily: 'Raleway, sans-serif' }}>
+            COSTA RICA
+          </h3>
 
-        {/* Subtitle */}
-        <p className="text-lg md:text-xl text-gray-300 mb-16 tracking-[0.3em]" style={{ fontFamily: 'Raleway, sans-serif' }}>
-        Luxury Real Estate
-        </p>
+          {/* Tagline */}
+          <p className="text-xl md:text-2xl text-gray-200 mb-8 font-light tracking-wide" style={{ fontFamily: 'Raleway, sans-serif' }}>
+          A paradise is about to unfold.
+          </p>
+
+          <p className="text-lg text-gray-300" style={{ fontFamily: 'Raleway, sans-serif' }}>
+            Discover luxury living today
+          </p>
+        </div>
 
         {/* Scroll indicator */}
         <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2">
@@ -120,16 +122,6 @@ export default function HomePage() {
           />
           </svg>
         </div>
-        </div>
-
-        {/* Business Location Section */}
-        <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2 text-center">
-        <h3 className="text-xl md:text-2xl font-semibold text-white mb-2" style={{ fontFamily: 'Raleway, sans-serif' }}>
-          COSTA RICA
-        </h3>
-        <p className="text-lg text-gray-300" style={{ fontFamily: 'Raleway, sans-serif' }}>
-          Discover luxury living today
-        </p>
         </div>
       </div>
       </section>
@@ -152,7 +144,7 @@ export default function HomePage() {
                 <p className="text-white text-lg mb-4" style={{ fontFamily: 'Raleway, sans-serif' }}>Follow us</p>
                 <div className="flex space-x-4">
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/vencilopez.realestate/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
@@ -162,7 +154,7 @@ export default function HomePage() {
                     </svg>
                   </a>
                   <a
-                    href="https://facebook.com"
+                    href="https://www.facebook.com/vencilopezrealestate/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
@@ -338,12 +330,12 @@ export default function HomePage() {
             © 2024 Venci Lopez Real Estate. All rights reserved.
           </p>
           <div className="flex space-x-4">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">
+            <a href="https://www.instagram.com/vencilopez.realestate/" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
               </svg>
             </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">
+            <a href="https://www.facebook.com/vencilopezrealestate/" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
               </svg>
