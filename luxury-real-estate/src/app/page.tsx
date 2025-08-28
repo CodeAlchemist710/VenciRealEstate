@@ -21,7 +21,7 @@ export default function HomePage() {
     message: ''
   });
 
-  const rotatingTexts = ['LUXURY', 'REAL ESTATE', 'LIFESTYLE', 'INVESTMENT'];
+  const rotatingTexts = ['LUXURY', 'INVESTMENT', 'LIFESTYLE', 'RETIREMENT'];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -93,7 +93,7 @@ export default function HomePage() {
           {/* Centered content; z-20 to sit above overlay & video */}
           <div className="relative z-20 grid place-items-center min-h-[100svh] px-4 sm:px-6 lg:px-8 py-8">
             <div className="text-center max-w-4xl w-full">
-              <div className="mb-[2vh]">
+              <div className="mb-[-4vh]">
                 <Image
                   src="/logo.png"
                   alt="Venci Lopez Real Estate"
@@ -105,18 +105,18 @@ export default function HomePage() {
                 />
               </div>
 
-              <div className="space-y-[1vh]">
-                <h1
-                  className="font-extralight text-white transition-all duration-350"
+              <div className="space-y-[0.5vh] mb-[6vh]">
+                <h2
+                  className="font-extralight text-white transition-all duration-25"
                   style={{
                     fontFamily: 'Raleway, sans-serif',
                     fontSize: 'clamp(1.8rem, 3.75vmin, 3rem)',
                   }}
                 >
                   {rotatingTexts[currentText]}
-                </h1>
+                </h2>
 
-                <h3
+                <h4
                   className="font-extralight text-white"
                   style={{
                     fontFamily: 'Raleway, sans-serif',
@@ -124,8 +124,10 @@ export default function HomePage() {
                   }}
                 >
                   COSTA RICA
-                </h3>
+                </h4>
+              </div>
 
+              <div className="space-y-[1vh]">
                 <p
                   className="text-gray-200 font-light tracking-wide"
                   style={{
