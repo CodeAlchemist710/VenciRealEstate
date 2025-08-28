@@ -83,39 +83,40 @@ export default function HomePage() {
       <div className="absolute inset-0 bg-gradient-to-b from-gray-800/50 via-gray-700/40 to-gray-900/60 pointer-events-none z-10" />
 
       {/* Hero Content */}
-      <div className="relative z-20 flex flex-col items-center justify-center h-full text-center">
-        {/* Logo */}
-        <div className="absolute top-6 left-1/2 transform -translate-x-1/2" style={{ marginLeft: '-6px' }}>
-        <Image
-          src="/logo.png"
-          alt="Venci Lopez Real Estate"
-          width={1800}
-          height={900}
-          className="w-auto h-64 sm:h-72 md:h-80 lg:h-96 xl:h-[32rem] object-contain"
-          priority
-        />
-        </div>
+      <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4">
+        {/* Combined Logo and Text Section */}
+        <div className="flex flex-col items-center space-y-8">
+          {/* Logo */}
+          <Image
+            src="/logo.png"
+            alt="Venci Lopez Real Estate"
+            width={1800}
+            height={900}
+            className="w-auto h-96 sm:h-112 md:h-128 lg:h-160 xl:h-192 object-contain"
+            priority
+          />
 
-        {/* Text Section */}
-        <div className="absolute bottom-36 left-1/2 transform -translate-x-1/2 text-center">
-          {/* Rotating Text */}
-          <h1 className="text-2xl md:text-4xl font-extralight text-white transition-all duration-350" style={{ fontFamily: 'Raleway, sans-serif', marginBottom: '30px' }}>
-          {rotatingTexts[currentText]}
-          </h1>
+          {/* Text Content */}
+          <div className="text-center">
+            {/* Rotating Text */}
+            <h1 className="text-1.5xl md:text-3xl font-extralight text-white transition-all duration-350 mb-6" style={{ fontFamily: 'Raleway, sans-serif' }}>
+            {rotatingTexts[currentText]}
+            </h1>
 
-          {/* Business Location Section */}
-          <h3 className="text-1xl md:text-2xl font-extralight text-white mb-8" style={{ fontFamily: 'Raleway, sans-serif' }}>
-            COSTA RICA
-          </h3>
+            {/* Business Location Section */}
+            <h3 className="text-xl md:text-2xl font-extralight text-white mb-8" style={{ fontFamily: 'Raleway, sans-serif' }}>
+              COSTA RICA
+            </h3>
 
-          {/* Tagline */}
-          <p className="text-xl md:text-2xl text-gray-200 mb-8 font-light tracking-wide" style={{ fontFamily: 'Raleway, sans-serif' }}>
-          A paradise is about to unfold.
-          </p>
+            {/* Tagline */}
+            <p className="text-xl md:text-2xl text-gray-200 mb-8 font-light tracking-wide" style={{ fontFamily: 'Raleway, sans-serif' }}>
+            A paradise is about to unfold.
+            </p>
 
-          <p className="text-lg text-gray-300" style={{ fontFamily: 'Raleway, sans-serif' }}>
-            Discover luxury living today
-          </p>
+            <p className="text-lg text-gray-300" style={{ fontFamily: 'Raleway, sans-serif' }}>
+              Discover luxury living today
+            </p>
+          </div>
         </div>
 
         {/* Scroll indicator */}
