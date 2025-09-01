@@ -38,7 +38,11 @@ export default function HomePage() {
   }, [rotatingTexts.length]);
 
   useEffect(() => {
-    initEmailJS();
+    // Delay to ensure EmailJS script is loaded
+    const timer = setTimeout(() => {
+      initEmailJS();
+    }, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -69,7 +73,7 @@ export default function HomePage() {
     try {
       await sendEmail({
         template_id: 'template_act1tiz',
-        to_email: 'lucahess98@gmail.com',
+        to_email: 'investments@venci-lopez-real-estate.com',
         from_name: formData.name,
         from_email: formData.email,
         phone: formData.phone,
@@ -95,7 +99,7 @@ export default function HomePage() {
     try {
       await sendEmail({
         template_id: 'template_zzpgjk8',
-        to_email: 'lucahess98@gmail.com',
+        to_email: 'investments@venci-lopez-real-estate.com',
         from_email: email,
         subject: 'New Newsletter Signup - Venci Real Estate',
         message: `New newsletter signup from: ${email}`

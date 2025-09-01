@@ -17,22 +17,29 @@ declare global {
 export const sendEmail = async (templateParams: Record<string, unknown>) => {
   if (typeof window !== 'undefined' && window.emailjs) {
     try {
+      console.log('Sending email with params:', templateParams);
       const result = await window.emailjs.send(
-        'service_f1p08lp',
+        'service_5yo6ixt',
         (templateParams.template_id as string) || 'template_act1tiz',
         templateParams,
-        'NikcKCN4BJHDmANB7'
+        'HeKTjYdAQ2UXKIVfX'
       );
+      console.log('Email sent successfully:', result);
       return result;
     } catch (error) {
+      console.error('EmailJS error:', error);
       throw error;
     }
   }
+  console.error('EmailJS not available');
   throw new Error('EmailJS not loaded');
 };
 
 export const initEmailJS = () => {
   if (typeof window !== 'undefined' && window.emailjs) {
-    window.emailjs.init('NikcKCN4BJHDmANB7');
+    console.log('Initializing EmailJS');
+    window.emailjs.init('HeKTjYdAQ2UXKIVfX');
+  } else {
+    console.error('EmailJS not available for initialization');
   }
 };
