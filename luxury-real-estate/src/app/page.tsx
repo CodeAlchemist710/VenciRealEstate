@@ -2,6 +2,7 @@
 
 import type React from 'react';
 import { useState, useEffect, useRef } from 'react';
+import { sendEmail, initEmailJS } from '@/lib/emailService';
 import Script from 'next/script';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -37,6 +38,10 @@ export default function HomePage() {
   }, [rotatingTexts.length]);
 
   useEffect(() => {
+    initEmailJS();
+  }, []);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -62,17 +67,17 @@ export default function HomePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+      await sendEmail({
+        template_id: 'template_act1tiz',
+        to_email: 'lucahess98@gmail.com',
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+        subject: 'New Contact Form Submission - Venci Real Estate'
       });
-      if (response.ok) {
-        alert('Thank you for your inquiry! We will contact you soon.');
-        setFormData({ name: '', email: '', phone: '', message: '' });
-      } else {
-        alert('There was an error sending your message. Please try again.');
-      }
+      alert('Thank you for your inquiry! We will contact you soon.');
+      setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error) {
       console.error('Error:', error);
       alert('There was an error sending your message. Please try again.');
@@ -85,11 +90,22 @@ export default function HomePage() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleEmailSignup = (e: React.FormEvent) => {
+  const handleEmailSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Email signup:', email);
-    alert('Thank you for subscribing!');
-    setEmail('');
+    try {
+      await sendEmail({
+        template_id: 'template_zzpgjk8',
+        to_email: 'lucahess98@gmail.com',
+        from_email: email,
+        subject: 'New Newsletter Signup - Venci Real Estate',
+        message: `New newsletter signup from: ${email}`
+      });
+      alert('Thank you for subscribing!');
+      setEmail('');
+    } catch (error) {
+      console.error('Error:', error);
+      alert('There was an error with your subscription. Please try again.');
+    }
   };
 
   return (
