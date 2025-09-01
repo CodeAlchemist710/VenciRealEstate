@@ -1,10 +1,20 @@
+interface EmailJSResponse {
+  status: number;
+  text: string;
+}
+
+interface EmailJS {
+  send: (serviceId: string, templateId: string, templateParams: Record<string, unknown>, publicKey: string) => Promise<EmailJSResponse>;
+  init: (publicKey: string) => void;
+}
+
 declare global {
   interface Window {
-    emailjs: any;
+    emailjs: EmailJS;
   }
 }
 
-export const sendEmail = async (templateParams: any) => {
+export const sendEmail = async (templateParams: Record<string, unknown>) => {
   if (typeof window !== 'undefined' && window.emailjs) {
     try {
       const result = await window.emailjs.send(
