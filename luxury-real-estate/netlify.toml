@@ -4,6 +4,7 @@
 [build]
   command = "bun run build"
   publish = ".next"
+  base = "luxury-real-estate"
 
 [build.environment]
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
