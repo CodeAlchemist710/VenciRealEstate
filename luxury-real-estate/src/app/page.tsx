@@ -1,7 +1,7 @@
 'use client';
 
 import type React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Script from 'next/script';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -20,6 +20,12 @@ export default function HomePage() {
     phone: '',
     message: ''
   });
+  const [isVisible, setIsVisible] = useState(false);
+  const [greenSectionVisible, setGreenSectionVisible] = useState(false);
+  const [contactVisible, setContactVisible] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const greenSectionRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
 
   const rotatingTexts = ['LUXURY', 'INVESTMENT', 'LIFESTYLE', 'RETIREMENT'];
 
@@ -29,6 +35,29 @@ export default function HomePage() {
     }, 4000);
     return () => clearInterval(interval);
   }, [rotatingTexts.length]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target === heroRef.current) {
+            setIsVisible(entry.isIntersecting);
+          } else if (entry.target === greenSectionRef.current) {
+            setGreenSectionVisible(entry.isIntersecting);
+          } else if (entry.target === contactRef.current) {
+            setContactVisible(entry.isIntersecting);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    
+    if (heroRef.current) observer.observe(heroRef.current);
+    if (greenSectionRef.current) observer.observe(greenSectionRef.current);
+    if (contactRef.current) observer.observe(contactRef.current);
+    
+    return () => observer.disconnect();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -91,9 +120,11 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/35 to-black/55 z-10" />
 
           {/* Centered content; z-20 to sit above overlay & video */}
-          <div className="relative z-20 grid place-items-center min-h-[100svh] px-4 sm:px-6 lg:px-8 py-8">
+          <div ref={heroRef} className="relative z-20 grid place-items-center min-h-[100svh] px-4 sm:px-6 lg:px-8 py-8">
             <div className="text-center max-w-4xl w-full">
-              <div className="mb-[-4vh]">
+              <div className={`mb-[-4vh] transition-all duration-1000 ease-out ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}>
                 <Image
                   src="/logo.png"
                   alt="Venci Lopez Real Estate"
@@ -105,7 +136,9 @@ export default function HomePage() {
                 />
               </div>
 
-              <div className="space-y-[0.5vh] mb-[6vh]">
+              <div className={`space-y-[0.5vh] mb-[6vh] transition-all duration-1000 delay-300 ease-out ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}>
                 <h2
                   className="font-extralight text-white transition-all duration-25"
                   style={{
@@ -127,7 +160,9 @@ export default function HomePage() {
                 </h4>
               </div>
 
-              <div className="space-y-[1vh]">
+              <div className={`space-y-[1vh] transition-all duration-1000 delay-500 ease-out ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}>
                 <p
                   className="text-gray-200 font-light tracking-wide"
                   style={{
@@ -151,7 +186,9 @@ export default function HomePage() {
             </div>
 
             {/* Scroll indicator (kept light) */}
-            <div className="mt-[3vh]">
+            <div className={`mt-[3vh] transition-all duration-1000 delay-700 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
               <div className="animate-bounce">
                 <svg
                   className="text-white"
@@ -177,14 +214,16 @@ export default function HomePage() {
         </section>
 
         {/* ---------------- Section 2: starts AFTER hero cleanly ---------------- */}
-        <section className="section-green relative z-0 bg-gradient-to-b from-green-950 to-emerald-900">
+        <section ref={greenSectionRef} className="section-green relative z-0 bg-gradient-to-b from-green-950 to-emerald-900">
           <div className="relative z-10 min-h-screen flex flex-col">
             {/* Main Content Area */}
             <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 max-w-7xl mx-auto px-8 py-20">
               {/* Left Side - Text Content */}
               <div className="flex flex-col justify-center">
                 <h2
-                  className="text-4xl md:text-5xl lg:text-6xl font-light text-white mb-12 leading-tight"
+                  className={`text-4xl md:text-5xl lg:text-6xl font-light text-white mb-12 leading-tight transition-all duration-1000 ease-out ${
+                    greenSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  }`}
                   style={{ fontFamily: 'Raleway, sans-serif' }}
                 >
                   DISCOVER THE ART OF
@@ -193,7 +232,9 @@ export default function HomePage() {
                 </h2>
 
                 {/* Social Media Section */}
-                <div className="mb-12">
+                <div className={`mb-12 transition-all duration-1000 delay-300 ease-out ${
+                  greenSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}>
                   <p
                     className="text-white text-lg mb-4"
                     style={{ fontFamily: 'Raleway, sans-serif' }}
@@ -227,7 +268,9 @@ export default function HomePage() {
 
               {/* Right Side - Email Signup & Decorative Element */}
               <div className="flex flex-col justify-center items-center lg:items-end">
-                <div className="mb-12 opacity-30">
+                <div className={`mb-12 opacity-30 transition-all duration-1000 delay-200 ease-out ${
+                  greenSectionVisible ? 'opacity-30 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}>
                   <svg width="200" height="200" viewBox="0 0 200 200" className="text-white">
                     <circle cx="100" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="1"/>
                     <circle cx="150" cy="100" r="30" fill="none" stroke="currentColor" strokeWidth="1"/>
@@ -237,7 +280,9 @@ export default function HomePage() {
                   </svg>
                 </div>
 
-                <div className="w-full max-w-md">
+                <div className={`w-full max-w-md transition-all duration-1000 delay-400 ease-out ${
+                  greenSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}>
                   <h3
                     className="text-white text-lg mb-6"
                     style={{ fontFamily: 'Raleway, sans-serif' }}
@@ -271,7 +316,9 @@ export default function HomePage() {
             </div>
 
             {/* Features Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto px-8 pb-20">
+            <div className={`grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto px-8 pb-20 transition-all duration-1000 delay-600 ease-out ${
+              greenSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
               <div className="text-center">
                 <h4 className="text-white text-sm font-medium mb-2" style={{ fontFamily: 'Raleway, sans-serif' }}>Natural Paradise</h4>
                 <div className="w-16 h-px bg-white/30 mx-auto"></div>
@@ -293,9 +340,11 @@ export default function HomePage() {
         </section>
 
         {/* Contact Section */}
-        <section className="py-20 px-4 bg-gradient-to-b from-emerald-900 to-green-950" style={{ fontFamily: 'Raleway, sans-serif' }}>
+        <section ref={contactRef} className="py-20 px-4 bg-gradient-to-b from-emerald-900 to-green-950" style={{ fontFamily: 'Raleway, sans-serif' }}>
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
+            <div className={`text-center mb-12 transition-all duration-1000 ease-out ${
+              contactVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
               <h2 className="text-3xl md:text-4xl font-light text-white mb-4 tracking-wide" style={{ fontFamily: 'Raleway, sans-serif' }}>
                 GET IN TOUCH
               </h2>
@@ -304,7 +353,9 @@ export default function HomePage() {
               </p>
             </div>
 
-            <Card className="bg-white/10 backdrop-blur-sm border-green-400/20 shadow-2xl">
+            <Card className={`bg-white/10 backdrop-blur-sm border-green-400/20 shadow-2xl transition-all duration-1000 delay-300 ease-out ${
+              contactVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
               <CardContent className="p-8">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
@@ -382,7 +433,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        <footer className="py-8 px-4 bg-green-950 border-t border-green-400/10" style={{ fontFamily: 'Raleway, sans-serif' }}>
+        <footer className={`py-8 px-4 bg-green-950 border-t border-green-400/10 transition-all duration-1000 delay-500 ease-out ${
+          contactVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`} style={{ fontFamily: 'Raleway, sans-serif' }}>
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
             <p className="text-white text-sm mb-4 md:mb-0" style={{ fontFamily: 'Raleway, sans-serif' }}>
               © 2024 Venci Lopez Real Estate. All rights reserved.
