@@ -19,7 +19,7 @@ export const sendEmail = async (templateParams: Record<string, unknown>) => {
     try {
       const result = await window.emailjs.send(
         'service_f1p08lp',
-        templateParams.template_id || 'template_act1tiz',
+        (templateParams.template_id as string) || 'template_act1tiz',
         templateParams,
         'NikcKCN4BJHDmANB7'
       );
